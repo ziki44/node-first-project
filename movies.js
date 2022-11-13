@@ -113,7 +113,7 @@ const fsp = fs.promises;
 //     fsp.writeFile('./movies.json', jsonMovies)
 // })
 
-//6.
+//6. ZROBIONE
 
 const readFilms = () => {
     return fsp.readFile('./movies.json', 'UTF8')
