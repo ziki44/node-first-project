@@ -75,5 +75,33 @@ loadData()
 
 // 1. Napisz funkcje, ktora bedzie odczytywala dane z pliku JSON, a nastepnie za pomoca metody map, wyswietl w konsoli tablice authorow wiadomosci
 
+
+const loadDataFromJSON = () => {
+  return fsp.readFile('./data.json', 'utf8');
+}
+
+loadDataFromJSON()
+  .then(data => {
+    const parsedJSON = JSON.parse(data);
+
+    const authors = parsedJSON.messages.map(message => message.author);
+
+    console.log(authors);
+  })
+
+
 // 2. Napisz funkcje, ktora bedzie zapisywala nowe wiadomosci do pliku JSON (zeby poprawnie zapisac do pliku JSON, najpierw musisz go odczytac, zparsowac i nastepnie zapisac)
 
+loadDataFromJSON()
+  .then(data => {
+    const parsedJSON = JSON.parse(data);
+    const newMessage = {
+      id: '123',
+      author: 'Michał',
+      message: 'OK!'
+    }
+
+    parsedJSON.messages.push(newMessage)
+
+    return fsp.writeFile('./data.json', JSON.stringify(parsedJSON), 'utf8')
+  })
